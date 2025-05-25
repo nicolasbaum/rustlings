@@ -27,15 +27,14 @@ mod my_module {
     use super::Command;
 
     pub fn transformer(input: Vec<(String, Command)>) -> Vec<String> {
-        input.into_iter()
-            .map(|(mut string, command)| {
-                match command {
-                    Command::Uppercase => string.to_uppercase(),
-                    Command::Trim => string.trim().to_string(),
-                    Command::Append(times) => {
-                        let bar = "bar".repeat(times);
-                        string + &bar
-                    }
+        input
+            .into_iter()
+            .map(|(mut string, command)| match command {
+                Command::Uppercase => string.to_uppercase(),
+                Command::Trim => string.trim().to_string(),
+                Command::Append(times) => {
+                    let bar = "bar".repeat(times);
+                    string + &bar
                 }
             })
             .collect()
